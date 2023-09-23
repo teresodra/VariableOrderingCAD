@@ -4,7 +4,6 @@ containing a set of unique features and its class"""
 
 import re
 import pickle
-import numpy as np
 from typing import List, Union
 
 from .replicating_Dorians_features import extract_features
@@ -16,8 +15,8 @@ def cleaning_dataset():
     """
     Clean and process the dataset.
 
-    This function performs several cleaning and processing steps on the dataset and saves the cleaned
-    dataset to a new file.
+    This function performs several cleaning and processing steps
+    on the dataset and saves the cleaned dataset to a new file.
 
     Returns:
     - None
@@ -44,8 +43,13 @@ def cleaning_dataset():
         pickle.dump(clean_dataset['names'], unique_features_file)
 
     # Clean timings and cells
-    clean_dataset['timings'] = [[penalize_timing(timings_ordering) for timings_ordering in timings_problem] for timings_problem in my_dataset['timings']]
-    clean_dataset['cells'] = [penalize_cells(cells_problem) for cells_problem in my_dataset['cells']]
+    clean_dataset['timings'] = \
+        [[penalize_timing(timing_ordering)
+         for timing_ordering in timings_problem]
+         for timings_problem in my_dataset['timings']]
+    clean_dataset['cells'] = \
+        [penalize_cells(cells_problem)
+         for cells_problem in my_dataset['cells']]
 
     # Copy other keys from the original dataset
     for key in my_dataset:
@@ -55,36 +59,6 @@ def cleaning_dataset():
     # Save the cleaned dataset
     with open(clean_dataset_filename, 'wb') as clean_dataset_file:
         pickle.dump(clean_dataset, clean_dataset_file)
-
-
-# def cleaning_dataset():
-#     dataset_filename = find_dataset_filename('unclean')
-#     clean_dataset_filename = find_dataset_filename('clean')
-#     with open(dataset_filename, 'rb') as f:
-#         dataset = pickle.load(f)
-#     my_dataset = extract_features(dataset)
-#     clean_dataset = dict()
-#     clean_dataset['names'], clean_dataset['features'] = \
-#         remove_notunique_features(my_dataset['names'],
-#                                   my_dataset['features'])
-#     print("features in biased", len(my_dataset['features'][0]))
-#     unique_features_filename = find_other_filename("unique_features")
-#     with open(unique_features_filename, 'wb') as unique_features_file:
-#         pickle.dump(clean_dataset['names'], unique_features_file)
-#     # Some timings are expressed as "Over 30", this is changed here
-#     clean_dataset['timings'] = \
-#         np.array([[penalize_timing(timings_ordering)
-#                   for timings_ordering in timings_problem]
-#                   for timings_problem in my_dataset['timings']])
-#     # Some cells are expressed as "Over 30", this is changed here
-#     clean_dataset['cells'] = \
-#         np.array([penalize_cells(cells_problem)
-#                   for cells_problem in my_dataset['cells']])
-#     for key in my_dataset:
-#         if key not in clean_dataset:
-#             clean_dataset[key] = my_dataset[key]
-#     with open(clean_dataset_filename, 'wb') as clean_dataset_file:
-#         pickle.dump(clean_dataset, clean_dataset_file)
 
 
 def penalize_timing(timing_str: str, penalization: float = 2) -> float:
@@ -103,20 +77,25 @@ def penalize_timing(timing_str: str, penalization: float = 2) -> float:
     return float(timing_str)
 
 
-def penalize_cells(cells: List[Union[int, str]], penalization: int = 2) -> List[Union[int, float]]:
+def penalize_cells(cells: List[Union[int, str]],
+                   penalization: int = 2) -> List[Union[int, float]]:
     """
     Convert a list of cells to integers with optional penalization.
 
     Args:
-    - cells (List[Union[int, str]]): The input list of cells containing integers or strings.
+    - cells (List[Union[int, str]]): The input list of cells
+    containing integers or strings.
     - penalization (int, optional): A penalization factor. Default is 2.
 
     Returns:
-    - List[Union[int, float]]: The converted list of integers with penalization applied if needed.
+    - List[Union[int, float]]: The converted list of integers
+    with penalization applied if needed.
     """
     int_cells = [int(cell) if is_int(cell) else cell for cell in cells]
-    max_cells = max([cell for cell in int_cells if isinstance(cell, int)], default=0)
-    penalization_cells = [cell if isinstance(cell, int) else penalization * max_cells for cell in int_cells]
+    max_cells = max([cell for cell in int_cells
+                     if isinstance(cell, int)], default=0)
+    penalization_cells = [cell if isinstance(cell, int)
+                          else penalization * max_cells for cell in int_cells]
     return penalization_cells
 
 
@@ -146,6 +125,3 @@ def is_int(input_str: str) -> bool:
     """
     int_pattern = r'^[-+]?\d+$'
     return re.match(int_pattern, input_str) is not None
-
-if __name__ == "__main__":
-    cleaning_dataset()
