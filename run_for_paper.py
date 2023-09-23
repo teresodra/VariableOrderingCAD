@@ -4,20 +4,19 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from create_clean_dataset import cleaning_dataset
+from ProcessingDatasets.create_clean_dataset import cleaning_dataset
 from test_train_datasets import create_train_test_datasets
 from test_train_datasets import create_regression_datasets
 from config.ml_models import all_models
 from config.ml_models import regressors
 from config.ml_models import classifiers
 from config.ml_models import heuristics
-from choose_hyperparams import choose_hyperparams
-from train_models import train_model
-from main_heuristics import ordering_choices_heuristics
-from find_filename import find_dataset_filename
-# from find_filename import find_timings_lists
-from find_filename import find_hyperparams_filename
-from find_filename import find_all_info
+from TrainingML.choose_hyperparams import choose_hyperparams
+from TrainingML.train_models import train_model
+from utils.find_filename import find_dataset_filename
+# from utils.find_filename import find_timings_lists
+from utils.find_filename import find_hyperparams_filename
+from utils.find_filename import find_all_info
 from test_models import compute_metrics
 from test_models import choose_indices
 

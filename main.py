@@ -16,8 +16,8 @@ import csv
 from config.ml_models import ml_models
 from config.general_values import dataset_qualities
 from config.general_values import purposes
-from find_filename import find_dataset_filename
-from find_filename import find_model_filename
+from utils.find_filename import find_dataset_filename
+from utils.find_filename import find_model_filename
 from create_clean_dataset import cleaning_dataset
 from test_train_datasets import create_train_test_datasets
 from choose_hyperparams import choose_hyperparams

@@ -6,7 +6,7 @@ from numpy import sort
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import cm
-from find_filename import find_timings_lists
+from utils.find_filename import find_timings_lists
 matplotlib.rcParams['mathtext.rm'] = 'Bitstream Vera Sans'
 matplotlib.rcParams['mathtext.it'] = 'Bitstream Vera Sans:italic'
 matplotlib.rcParams['mathtext.bf'] = 'Bitstream Vera Sans:bold'

@@ -14,8 +14,8 @@ else:
 from config.general_values import purposes
 from config.general_values import dataset_qualities
 from sklearn.model_selection import train_test_split
-from find_filename import find_dataset_filename
-from find_filename import find_other_filename
+from utils.find_filename import find_dataset_filename
+from utils.find_filename import find_other_filename
 from math import log
 from sklearn.model_selection import GroupShuffleSplit 
 

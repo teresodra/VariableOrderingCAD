@@ -17,19 +17,19 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 classifiers = {
     'DT-Classifier': DecisionTreeClassifier,
-    'KNN-Classifier': KNeighborsClassifier,
-    'RF-Classifier': RandomForestClassifier,
-    'SVM-Classifier': SVC,
-    'MLP-Classifier': MLPClassifier,
+    # 'KNN-Classifier': KNeighborsClassifier,
+    # 'RF-Classifier': RandomForestClassifier,
+    # 'SVM-Classifier': SVC,
+    # 'MLP-Classifier': MLPClassifier,
     # 'GB-Classifier': GradientBoostingClassifier
 }
 
 regressors = {
     'DT-Regressor': DecisionTreeRegressor,
-    'KNN-Regressor': KNeighborsRegressor,
-    'RF-Regressor': RandomForestRegressor,
-    'SVM-Regressor': SVR,
-    'MLP-Regressor': MLPRegressor,
+    # 'KNN-Regressor': KNeighborsRegressor,
+    # 'RF-Regressor': RandomForestRegressor,
+    # 'SVM-Regressor': SVR,
+    # 'MLP-Regressor': MLPRegressor,
     # 'GB-Regressor': GradientBoostingRegressor
 }
 

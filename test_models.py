@@ -6,7 +6,7 @@ import importlib.util
 from config.ml_models import regressors
 from config.ml_models import classifiers
 from config.ml_models import heuristics
-from find_filename import find_model_filename
+from utils.find_filename import find_model_filename
 from main_heuristics import ordering_choices_heuristics
 # from train_models import ordering_choice_reinforcement
 # from train_models import training_instances_reinforcement

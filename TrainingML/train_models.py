@@ -1,11 +1,12 @@
 
 import pickle
-from yaml_tools import read_yaml_from_file
+
+from utils.yaml_tools import read_yaml_from_file
 from config.ml_models import all_models
-from find_filename import find_dataset_filename
-from find_filename import find_hyperparams_filename
-from find_filename import find_model_filename
-# from find_filename import find_other_filename
+from utils.find_filename import find_dataset_filename
+from utils.find_filename import find_hyperparams_filename
+from utils.find_filename import find_model_filename
+# from utils.find_filename import find_other_filename
 # from dataset_manipulation import give_all_symmetries
 # import numpy as np
 # from sklearn import metrics
