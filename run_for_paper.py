@@ -133,6 +133,10 @@ def study_a_model(model_name: str,
 
 
 if __name__ == "__main__":
+
+    filename = find_dataset_filename('Train', dataset_quality=None, paradigm='')
+    with open(filename, 'wb') as file:
+        file
     reps = 1
     data = dict()
     data['TotalTime'] = []
