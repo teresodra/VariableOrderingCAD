@@ -3,10 +3,10 @@ import unittest
 import time
 
 # Import the critical_points function from your module
-from lucas_heuristic import critical_points
-from lucas_heuristic import find_roots
-from lucas_heuristic import newton_raphson
-from lucas_heuristic import count_critical_points
+from .lucas_heuristic import critical_points
+from .lucas_heuristic import find_roots
+from .lucas_heuristic import newton_raphson
+from .lucas_heuristic import count_critical_points
 
 
 class TestCountCriticalPoints(unittest.TestCase):
