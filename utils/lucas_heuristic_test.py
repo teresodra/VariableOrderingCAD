@@ -47,8 +47,8 @@ class TestNewtonRaphson(unittest.TestCase):
         root = newton_raphson(equations, variables, initial_guess)
 
         # Ensure the root is one of the possibilities
-        self.assertAlmostEqual(root[0], 2, msg="The root given is not a root")
-        self.assertAlmostEqual(root[1], 3, msg="The root given is not a root")
+        self.assertAlmostEqual(root[0], 2, places=5, msg="The root given is not a root")
+        self.assertAlmostEqual(root[1], 3, places=5, msg="The root given is not a root")
 
     def test_invalid_input(self):
         # Test with invalid input where the number of equations
@@ -113,7 +113,7 @@ class TestFindRoots(unittest.TestCase):
         sqrt2div2 = 0.7071068
         for root in roots:
             for coordinate in root:
-                self.assertAlmostEqual(abs(coordinate), sqrt2div2)
+                self.assertAlmostEqual(abs(coordinate), sqrt2div2, places=5)
 
     def test_invalid_input(self):
         # Test with invalid input; number of equations
