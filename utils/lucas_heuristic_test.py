@@ -143,7 +143,7 @@ class TestCriticalPoints(unittest.TestCase):
         # Test a polynomial with a single variable (e.g., x)
         x = sp.symbols('x')
         poly = x**2 + 3*x + 2
-        result = critical_points(poly)
+        result = critical_points(poly, trials_factor=20)
         expected = {x: 2}
         self.assertDictEqual(result, expected)
 
