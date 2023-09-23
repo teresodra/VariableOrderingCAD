@@ -44,8 +44,8 @@ def cleaning_dataset():
         pickle.dump(clean_dataset['names'], unique_features_file)
 
     # Clean timings and cells
-    clean_dataset['timings'] = np.array([[penalize_timing(timings_ordering) for timings_ordering in timings_problem] for timings_problem in my_dataset['timings']])
-    clean_dataset['cells'] = np.array([penalize_cells(cells_problem) for cells_problem in my_dataset['cells']])
+    clean_dataset['timings'] = [[penalize_timing(timings_ordering) for timings_ordering in timings_problem] for timings_problem in my_dataset['timings']]
+    clean_dataset['cells'] = [penalize_cells(cells_problem) for cells_problem in my_dataset['cells']]
 
     # Copy other keys from the original dataset
     for key in my_dataset:

@@ -29,6 +29,7 @@ def k_folds_ml(x_train, y_train, model, random_state=0):
 def choose_hyperparams(model_name, paradigm, training_quality):
     """Given a ml_model and a method, a file with the hyperparameters
     chosen by cross validation is created"""
+    print(f"Tunning hyperparameters for {model_name}")
     this_dataset_file = find_dataset_filename('Train', dataset_quality=training_quality)
     with open(this_dataset_file, 'rb') as f:
         dataset = pickle.load(f)

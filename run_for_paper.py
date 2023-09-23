@@ -100,8 +100,6 @@ def study_a_model(model_name: str,
                                                              paradigm,
                                                              training_quality) + '.yaml'
             if tune_hyperparameters or not os.path.exists(hyperparams_filename):
-                if not os.path.exists(hyperparams_filename):
-                    print('hyperparams_filename doesnt exits \n', hyperparams_filename)
                 choose_hyperparams(model_name, paradigm, training_quality)
             # Hyperparameters ready
             train_model(model_name, paradigm, training_quality)
@@ -133,10 +131,6 @@ def study_a_model(model_name: str,
 
 
 if __name__ == "__main__":
-
-    filename = find_dataset_filename('Train', dataset_quality=None, paradigm='')
-    with open(filename, 'wb') as file:
-        file
     reps = 1
     data = dict()
     data['TotalTime'] = []
