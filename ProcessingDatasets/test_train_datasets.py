@@ -1,23 +1,13 @@
-import numpy as np
 import pickle
-import csv
-import importlib.util
-# Check if 'dataset_manipulation' is installed
-if isinstance(importlib.util.find_spec('dataset_manipulation'), type(None)):
-    from dataset_manipulation import remove_notunique_features
-    from dataset_manipulation import balance_dataset
-    from dataset_manipulation import augmentate_dataset
-else:
-    from packages.dataset_manipulation import remove_notunique_features
-    from packages.dataset_manipulation import balance_dataset
-    from packages.dataset_manipulation import augmentate_dataset
+from math import log
+from sklearn.model_selection import GroupShuffleSplit
+
+from ProcessingDatasets.dataset_manipulation import balance_dataset
+from ProcessingDatasets.dataset_manipulation import augmentate_dataset
 from config.general_values import purposes
 from config.general_values import dataset_qualities
 from sklearn.model_selection import train_test_split
 from utils.find_filename import find_dataset_filename
-from utils.find_filename import find_other_filename
-from math import log
-from sklearn.model_selection import GroupShuffleSplit 
 
 
 def count_instances(my_dataset, instance):

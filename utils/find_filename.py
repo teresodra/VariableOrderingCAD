@@ -19,8 +19,8 @@ def find_dataset_filename(purpose, dataset_quality=None, paradigm=''):
     if purpose == "unclean":
         return os.path.join(os.path.dirname(__file__), '..',
                             'datasets', 'before_processing',
-                            'dataset_without_repetition_return_ncells_with_subdir.txt')
-    # 'dataset_with_repetition_return_ncells.txt')
+                            'dataset_with_repetition_return_ncells_with_subdir.txt')
+                            # 'dataset_without_repetition_return_ncells_with_subdir.txt')
     # for returning "repeated" instances
     # those with the same number of cells for all projections
     elif purpose == "clean":

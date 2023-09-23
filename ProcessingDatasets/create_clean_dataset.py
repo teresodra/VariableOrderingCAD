@@ -5,12 +5,9 @@ containing a set of unique features and its class"""
 import re
 import pickle
 import numpy as np
+
 from .replicating_Dorians_features import extract_features
-import importlib
-if isinstance(importlib.util.find_spec('dataset_manipulation'), type(None)):
-    from dataset_manipulation import remove_notunique_features
-else:
-    from packages.dataset_manipulation import remove_notunique_features
+from ProcessingDatasets.dataset_manipulation import remove_notunique_features
 from utils.find_filename import find_dataset_filename
 from utils.find_filename import find_other_filename
 

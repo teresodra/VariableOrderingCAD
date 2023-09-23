@@ -1,20 +1,12 @@
 import math
 import pickle
-import importlib.util
-
 
 from config.ml_models import regressors
 from config.ml_models import classifiers
 from config.ml_models import heuristics
 from utils.find_filename import find_model_filename
 from main_heuristics import ordering_choices_heuristics
-# from train_models import ordering_choice_reinforcement
-# from train_models import training_instances_reinforcement
-# Check if 'dataset_manipulation' is installed
-if isinstance(importlib.util.find_spec('dataset_manipulation'), type(None)):
-    from dataset_manipulation import augmentate_instance
-else:
-    from packages.dataset_manipulation.dataset_manipulation import augmentate_instance
+from ProcessingDatasets.dataset_manipulation import augmentate_instance
 
 
 # def test_model(ml_model, paradigm, testing_method='Augmented'):

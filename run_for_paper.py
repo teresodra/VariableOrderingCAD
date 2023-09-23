@@ -5,8 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from ProcessingDatasets.create_clean_dataset import cleaning_dataset
-from test_train_datasets import create_train_test_datasets
-from test_train_datasets import create_regression_datasets
+from ProcessingDatasets.test_train_datasets import create_train_test_datasets
+from ProcessingDatasets.test_train_datasets import create_regression_datasets
 from config.ml_models import all_models
 from config.ml_models import regressors
 from config.ml_models import classifiers
