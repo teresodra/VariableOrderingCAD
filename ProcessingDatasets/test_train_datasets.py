@@ -39,24 +39,6 @@ def create_train_test_datasets():
             datasets['Test_Biased'][key] = \
                 [dataset[key][i] for i in test_inds]
 
-    # datasets['Train_Biased']['features'], \
-    #     datasets['Test_Biased']['features'], \
-    #     datasets['Train_Biased']['labels'], \
-    #     datasets['Test_Biased']['labels'], \
-    #     datasets['Train_Biased']['timings'], \
-    #     datasets['Test_Biased']['timings'], \
-    #     datasets['Train_Biased']['projections'], \
-    #     datasets['Test_Biased']['projections'], \
-    #     datasets['Train_Biased']['cells'], \
-    #     datasets['Test_Biased']['cells'] = \
-        # train_test_split(
-        #                  dataset['features'],
-        #                  dataset['labels'],
-        #                  dataset['timings'],
-        #                  dataset['projections'],
-        #                  dataset['cells'],
-        #                  test_size=0.20,
-        #                  random_state=random_state)
     keys = ['features', 'timings', 'cells']
     for purpose in purposes:
         datasets[f'{purpose}_Balanced'] = \
