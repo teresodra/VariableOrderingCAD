@@ -18,9 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-      working-directory: ./VariableOrderingCAD
 
     - name: Run tests
       run: |
         pytest
-      working-directory: ./VariableOrderingCAD
