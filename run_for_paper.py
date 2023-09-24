@@ -5,8 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from ProcessingDatasets.create_clean_dataset import cleaning_dataset
-from ProcessingDatasets.test_train_datasets import create_train_test_datasets
-from ProcessingDatasets.test_train_datasets import create_regression_datasets
+from ProcessingDatasets.train_test_datasets import create_train_test_datasets
+from ProcessingDatasets.train_test_datasets import create_regression_datasets
 from config.ml_models import all_models
 from config.ml_models import regressors
 from config.ml_models import classifiers
@@ -165,8 +165,6 @@ if __name__ == "__main__":
         all_total_times[model_name] = model_info['AllTotalTime']
 
     dominiks_plots(all_total_times)
-
-
 
 
 # def choose_indices(model, dataset):
