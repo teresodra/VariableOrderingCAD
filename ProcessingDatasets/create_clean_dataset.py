@@ -123,5 +123,7 @@ def is_int(input_str: str) -> bool:
     Returns:
     - bool: True if the string can be converted to an int, False otherwise.
     """
+    if type(input_str) != str:
+        return False
     int_pattern = r'^[-+]?\d+$'
     return re.match(int_pattern, input_str) is not None
