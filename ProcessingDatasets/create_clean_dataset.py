@@ -6,7 +6,7 @@ import re
 import pickle
 from typing import List, Union
 
-from .replicating_Dorians_features import extract_features
+from ProcessingDatasets.replicating_Dorians_features import extract_features
 from ProcessingDatasets.dataset_manipulation import remove_notunique_features
 from utils.find_filename import find_dataset_filename, find_other_filename
 
@@ -43,6 +43,7 @@ def cleaning_dataset():
         pickle.dump(clean_dataset['names'], unique_features_file)
 
     # Clean timings and cells
+    print(type(my_dataset['timings'][0][0]))
     clean_dataset['timings'] = \
         [[penalize_timing(timing_ordering)
          for timing_ordering in timings_problem]
@@ -109,8 +110,13 @@ def is_float(input_str: str) -> bool:
     Returns:
     - bool: True if the string can be converted to a float, False otherwise.
     """
-    float_pattern = r'^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$'
-    return re.match(float_pattern, input_str) is not None
+    try:
+        float(input_str)
+        return True
+    except ValueError:
+        return False
+    # float_pattern = r'^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$'
+    # return re.match(float_pattern, input_str) is not None
 
 
 def is_int(input_str: str) -> bool:
@@ -123,7 +129,12 @@ def is_int(input_str: str) -> bool:
     Returns:
     - bool: True if the string can be converted to an int, False otherwise.
     """
-    if type(input_str) != str:
+    try:
+        int(input_str)
+        return True
+    except ValueError:
         return False
-    int_pattern = r'^[-+]?\d+$'
-    return re.match(int_pattern, input_str) is not None
+    # if type(input_str) != str:
+    #     return False
+    # int_pattern = r'^[-+]?\d+$'
+    # return re.match(int_pattern, input_str) is not None

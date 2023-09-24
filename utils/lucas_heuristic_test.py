@@ -178,7 +178,3 @@ class TestCriticalPoints(unittest.TestCase):
         result = critical_points(poly, 10)
         expected = {x: 1, y: 1, z: 1, w: 1}
         self.assertDictEqual(result, expected)
-
-
-if __name__ == '__main__':
-    unittest.main()
