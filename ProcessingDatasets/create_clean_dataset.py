@@ -2,21 +2,30 @@
 the sets of polynomials and its timings for each order, creates a dataset
 containing a set of unique features and its class"""
 
-import re
+import json
 import pickle
 from typing import List, Union
 
 from ProcessingDatasets.replicating_Dorians_features import extract_features
 from ProcessingDatasets.dataset_manipulation import remove_notunique_features
 from utils.find_filename import find_dataset_filename, find_other_filename
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
-def cleaning_dataset():
+def normalise_features(names, features, normalization):
+    return normalised_features
+
+
+def cleaning_dataset(normalization: str = 'scaled'):
     """
     Clean and process the dataset.
 
     This function performs several cleaning and processing steps
     on the dataset and saves the cleaned dataset to a new file.
+
+    Args:
+    - normalization: The normalization method.
+        Allowed values: "scaled" or "standardized".
 
     Returns:
     - None
@@ -35,12 +44,16 @@ def cleaning_dataset():
     clean_dataset['names'], clean_dataset['features'] = \
         remove_notunique_features(my_dataset['names'], my_dataset['features'])
 
+    # clean_dataset['features'] = normalise_features(clean_dataset['names'],
+    #                                                clean_dataset['features'],
+    #                                                normalization)
+
     print("features in biased", len(my_dataset['features'][0]))
 
     # Save names of unique features to a file
     unique_features_filename = find_other_filename("unique_features")
-    with open(unique_features_filename, 'wb') as unique_features_file:
-        pickle.dump(clean_dataset['names'], unique_features_file)
+    with open(unique_features_filename, 'w') as unique_features_file:
+        json.dump(clean_dataset['names'], unique_features_file)
 
     # Clean timings and cells
     print(type(my_dataset['timings'][0][0]))

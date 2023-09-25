@@ -1,4 +1,5 @@
 import math
+import json
 import pickle
 import random
 
@@ -76,7 +77,7 @@ def get_vars_features(polynomials):
     nvar = len(polynomials[0][0]) - 1
     unique_features_filename = find_other_filename("unique_features")
     with open(unique_features_filename, 'rb') as unique_features_file:
-        unique_names = pickle.load(unique_features_file)
+        unique_names = json.load(unique_features_file)
     for var in range(nvar):
         var_features, var_names = \
             compute_features_for_var(polynomials, var)

@@ -46,8 +46,6 @@ grid['RF-Regressor'] = {
     'max_features': ['sqrt', 'log2'],
     'max_depth': [4, 6, 8],
     'criterion': ['friedman_mse', 'squared_error']
-    # 'criterion': ['squared_error', 'friedman_mse'],
-    # "max_depth": [1, 3, 7],
     # "min_samples_leaf": [1, 5, 10],
 }
 grid['KNN-Regressor'] = {

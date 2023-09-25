@@ -50,6 +50,7 @@ class TestCleaningDataset(unittest.TestCase):
 
         # Upload the mock unclean dataset
         # to the temp directory
+        print(self.temp_dir)
         unclean_dataset_filename = find_dataset_filename('unclean')
         with open(unclean_dataset_filename, 'wb') as unclean_file:
             pickle.dump(mock_unclean_dataset, unclean_file)

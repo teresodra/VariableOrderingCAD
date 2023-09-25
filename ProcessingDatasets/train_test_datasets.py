@@ -31,6 +31,7 @@ def create_train_test_datasets():
     # train and test sets are created
     random_state = 0
     print(dataset.keys())
+    print(dataset['subdir'])
     train_inds, test_inds = my_train_test_split(dataset['subdir'])
     for key in dataset:
         if key != 'names':
