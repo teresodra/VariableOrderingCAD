@@ -12,7 +12,60 @@ from utils.find_filename import find_dataset_filename, find_other_filename
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
-def normalise_features(names, features, normalization):
+def normalise_features(names, features, normalization='standarised', nvar=3):
+
+    # Check there is one name for every feature
+    if len(names) != len(features[0]):
+        raise ValueError("There should be a name for each feature")
+    n = len(names)
+    nfeatures = n//nvar
+    ninstances = len(features)
+
+    # Check that the names are the same for all the variables
+    if n % nvar != 0:
+        raise ValueError("The names should be the same for all variables")
+    for i in range(nfeatures):
+        values = set(names[j*nfeatures+i][:-14] for j in range(nvar))
+        # After -14 information relevant to the variable should be different
+        if len(values) != 1:
+            raise ValueError("The names should be the same for all variables")
+
+    # Separate by features
+    by_features = [list(row) for row in zip(*features)]
+
+    # Put the related features together
+    related_features = []
+    for i in range(nfeatures):
+        related_features.append([feature for j in range(nvar)
+                                 for feature in by_features[j*nfeatures+i]])
+
+    # Transpose
+    transposed_features = [list(row) for row in zip(*related_features)]
+
+    if normalization == 'scaled':
+        # Min-max scaling
+        normaliser = MinMaxScaler()
+    elif normalization == 'standarised':
+        # Standardization
+        normaliser = StandardScaler()
+
+    normalised_feature = normaliser.fit_transform(transposed_features)
+
+    # Transpose back
+    normalised_related_features = [list(row) for row
+                                   in zip(*normalised_feature)]
+
+    # Break them into the ones for each variable
+    normalised_by_features = []
+    for j in range(nvar):
+        for i in range(nfeatures):
+            normalised_by_features.append(
+                normalised_related_features[i][j*ninstances:(j+1)*ninstances])
+
+    # Transpose back
+    normalised_features = [list(row) for row
+                           in zip(*normalised_by_features)]
+
     return normalised_features
 
 
@@ -25,7 +78,7 @@ def cleaning_dataset(normalization: str = 'scaled'):
 
     Args:
     - normalization: The normalization method.
-        Allowed values: "scaled" or "standardized".
+        Allowed values: "scaled" or "standarised".
 
     Returns:
     - None
@@ -43,10 +96,12 @@ def cleaning_dataset(normalization: str = 'scaled'):
     clean_dataset = dict()
     clean_dataset['names'], clean_dataset['features'] = \
         remove_notunique_features(my_dataset['names'], my_dataset['features'])
+    print(len(clean_dataset['features']), len(clean_dataset['features'][0]))
 
-    # clean_dataset['features'] = normalise_features(clean_dataset['names'],
-    #                                                clean_dataset['features'],
-    #                                                normalization)
+    clean_dataset['features'] = normalise_features(clean_dataset['names'],
+                                                   clean_dataset['features'],
+                                                   normalization)
+    print(len(clean_dataset['features']), len(clean_dataset['features'][0]))
 
     print("features in biased", len(my_dataset['features'][0]))
 
@@ -58,11 +113,11 @@ def cleaning_dataset(normalization: str = 'scaled'):
     # Clean timings and cells
     print(type(my_dataset['timings'][0][0]))
     clean_dataset['timings'] = \
-        [[penalize_timing(timing_ordering)
+        [[penalise_timing(timing_ordering)
          for timing_ordering in timings_problem]
          for timings_problem in my_dataset['timings']]
     clean_dataset['cells'] = \
-        [penalize_cells(cells_problem)
+        [penalise_cells(cells_problem)
          for cells_problem in my_dataset['cells']]
 
     # Copy other keys from the original dataset
@@ -75,7 +130,7 @@ def cleaning_dataset(normalization: str = 'scaled'):
         pickle.dump(clean_dataset, clean_dataset_file)
 
 
-def penalize_timing(timing_str: str, penalization: float = 2) -> float:
+def penalise_timing(timing_str: str, penalization: float = 2) -> float:
     """
     Convert a timing string to a numerical value with optional penalization.
 
@@ -91,7 +146,7 @@ def penalize_timing(timing_str: str, penalization: float = 2) -> float:
     return float(timing_str)
 
 
-def penalize_cells(cells: List[Union[int, str]],
+def penalise_cells(cells: List[Union[int, str]],
                    penalization: int = 2) -> List[Union[int, float]]:
     """
     Convert a list of cells to integers with optional penalization.

@@ -31,7 +31,6 @@ def create_train_test_datasets():
     # train and test sets are created
     random_state = 0
     print(dataset.keys())
-    print(dataset['subdir'])
     train_inds, test_inds = my_train_test_split(dataset['subdir'])
     for key in dataset:
         if key != 'names':
@@ -122,7 +121,9 @@ def create_regression_datasets(dataset_quality='Augmented',
 def my_train_test_split(groups):
     splitter = GroupShuffleSplit(test_size=.20, n_splits=2, random_state=7)
     split = splitter.split(groups, groups=groups)
-    train_inds, test_inds = next(split)
+    while True:
+        train_inds, test_inds = next(split)
+        print(len(train_inds)/len(groups))
     return train_inds, test_inds
 
 
